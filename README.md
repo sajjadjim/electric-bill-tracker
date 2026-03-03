@@ -28,25 +28,25 @@ git clone https://github.com/sajjadjim/electric-bill-tracker.git
 cd electric-bill-tracker
 ```
 
-২. ডিপেন্ডেন্সি ইনস্টল করুন:
+## ২. ডিপেন্ডেন্সি ইনস্টল করুন:
 
 npm install
 
-৩. .env.local ফাইল তৈরি করে নিচের ভ্যারিয়েবলগুলো যোগ করুন:
+## ৩. .env.local ফাইল তৈরি করে নিচের ভ্যারিয়েবলগুলো যোগ করুন:
 ```bash
 MONGODB_URI=your_mongodb_connection_string
 ALLOWED_EMAIL=sajjadjim15@gmail.com
 NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
 # অন্যান্য ফায়ারবেস কী-গুলো এখানে দিন
 ```
-📸 Screenshots
+## 📸 Screenshots
 আপনার ড্যাশবোর্ডের প্রধান অংশগুলো:
 
 Balance Overview: বর্তমান ক্রেডিট এবং কুইক ট্রানজ্যাকশন প্যানেল।
 
 Consumption Chart: মাসিক খরচের গ্রাফিকাল রিপ্রেজেন্টেশন।
 
-📄 License
+## 📄 License
 This project is for personal use and management.
 
 Developed by Sajjad Hossain Jim ⚡
