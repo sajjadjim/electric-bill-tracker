@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const BillSchema = new mongoose.Schema({
   userEmail: { type: String, required: true, unique: true },
   balance: { type: Number, default: 0 },
@@ -10,5 +9,4 @@ const BillSchema = new mongoose.Schema({
     prevBalance: Number
   }]
 }, { timestamps: true });
-
 export default mongoose.models.Bill || mongoose.model("Bill", BillSchema);

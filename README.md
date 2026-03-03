@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ⚡ VOLT-DASH: Personal Electric Bill Tracker
 
-## Getting Started
+Volt-Dash একটি আধুনিক এবং শক্তিশালী ওয়েব অ্যাপ্লিকেশন যা আপনার ইলেকট্রিক বিল এবং রিচার্জ হিস্ট্রি ট্র্যাক করতে সাহায্য করে। এটি মূলত Next.js, MongoDB এবং Firebase দিয়ে তৈরি করা হয়েছে।
 
-First, run the development server:
+## 🚀 Live Demo
+আপনার লাইভ ওয়েবসাইটটি এখানে দেখুন: [electric-billtracker.vercel.app](https://electric-billtracker.vercel.app)
 
+## ✨ Features
+* **Secure Google Login:** শুধুমাত্র নির্দিষ্ট ইমেইল (`sajjadjim15@gmail.com`) দিয়ে লগইন করার সুবিধা।
+* **Real-time Synchronization:** মঙ্গোডিবি এটলাসের মাধ্যমে ডাটা সরাসরি সিঙ্ক হয়।
+* **Interactive Visuals:** রিচার্জ এবং খরচের তুলনা করার জন্য সুন্দর বার চার্ট (Histogram)।
+* **Monthly Filtering:** মাস ভিত্তিক ডাটা এবং ট্রানজ্যাকশন লগ দেখার সুবিধা।
+* **Eye-Smoothing UI:** ডার্ক মোড এবং গ্লাস-মরফিজম ডিজাইনের সমন্বয়ে তৈরি আধুনিক ইন্টারফেস।
+
+## 🛠️ Tech Stack
+* **Frontend:** Next.js 14, Tailwind CSS, Framer Motion
+* **Database:** MongoDB Atlas (Database: `electric_tracker`, Collection: `billing_db`)
+* **Authentication:** Firebase Auth (Google Provider)
+* **Deployment:** Vercel
+
+
+
+## ⚙️ Installation & Setup
+
+১. রিপোজিটরি ক্লোন করুন:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/sajjadjim/electric-bill-tracker.git
+cd electric-bill-tracker
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+২. ডিপেন্ডেন্সি ইনস্টল করুন:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+৩. .env.local ফাইল তৈরি করে নিচের ভ্যারিয়েবলগুলো যোগ করুন:
+```bash
+MONGODB_URI=your_mongodb_connection_string
+ALLOWED_EMAIL=sajjadjim15@gmail.com
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+# অন্যান্য ফায়ারবেস কী-গুলো এখানে দিন
+```
+📸 Screenshots
+আপনার ড্যাশবোর্ডের প্রধান অংশগুলো:
 
-## Learn More
+Balance Overview: বর্তমান ক্রেডিট এবং কুইক ট্রানজ্যাকশন প্যানেল।
 
-To learn more about Next.js, take a look at the following resources:
+Consumption Chart: মাসিক খরচের গ্রাফিকাল রিপ্রেজেন্টেশন।
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📄 License
+This project is for personal use and management.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Developed by Sajjad Hossain Jim ⚡
