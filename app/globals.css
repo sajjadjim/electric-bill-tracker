@@ -1,26 +1,259 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ─────────────────────────────────────────────────────────
+   ⚡ VOLTDASH — DEVELOPER DARK THEME (single theme, no toggle)
+   All layout is done via inline styles in components.
+   This file handles: animations, custom visual classes.
+───────────────────────────────────────────────────────── */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Animated gradient background */
+  background:
+    radial-gradient(ellipse at 10% 15%,  rgba(120, 60, 255, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%,  rgba(0,  100, 255, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 5%,   rgba(0,  220, 230, 0.09) 0%, transparent 40%),
+    linear-gradient(160deg, #02030f 0%, #080118 30%, #020d1a 65%, #030012 100%);
+  background-attachment: fixed;
+  color: #c8d8ff;
+  min-height: 100vh;
 }
+
+/* Subtle dot grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(120, 60, 255, 0.45); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(120, 60, 255, 0.75); }
+
+/* Number input spinner off */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Select options */
+select option { background: #0a0020; color: #c8d8ff; }
+
+/* ─────────────────────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes aurora {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pulse-neon {
+  0%, 100% { box-shadow: 0 0 8px rgba(120,60,255,0.5),  0 0 20px rgba(120,60,255,0.2); }
+  50%       { box-shadow: 0 0 18px rgba(120,60,255,0.9), 0 0 50px rgba(120,60,255,0.4); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes shimmer-slide {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(300%) skewX(-15deg); }
+}
+@keyframes orb-drift {
+  0%   { transform: translate(0px,   0px)   scale(1);    opacity: 0.7; }
+  33%  { transform: translate(40px, -25px)  scale(1.08); opacity: 1;   }
+  66%  { transform: translate(-25px, 18px)  scale(0.93); opacity: 0.8; }
+  100% { transform: translate(0px,   0px)   scale(1);    opacity: 0.7; }
+}
+@keyframes border-flow {
+  0%   { border-color: rgba(120,60,255,0.3); }
+  33%  { border-color: rgba(0,200,255,0.3); }
+  66%  { border-color: rgba(0,255,140,0.2); }
+  100% { border-color: rgba(120,60,255,0.3); }
+}
+@keyframes count-up {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-float      { animation: float 4s ease-in-out infinite; }
+.animate-spin-slow  { animation: spin-slow 8s linear infinite; }
+.animate-slide-up   { animation: slide-up 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+/* ─────────────────────────────────────────────────────────
+   GLASS CARD
+───────────────────────────────────────────────────────── */
+.card {
+  background: rgba(255, 255, 255, 0.038);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+}
+.card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(120, 60, 255, 0.28);
+  box-shadow: 0 0 32px rgba(120, 60, 255, 0.10);
+  transform: translateY(-1px);
+}
+
+/* ─────────────────────────────────────────────────────────
+   GRADIENT TEXTS
+───────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 40%, #34d399 80%, #a78bfa 100%);
+  background-size: 250% 250%;
+  animation: aurora 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-green {
+  background: linear-gradient(135deg, #34d399, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-red {
+  background: linear-gradient(135deg, #f87171, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-blue {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─────────────────────────────────────────────────────────
+   HEADER SEPARATOR
+───────────────────────────────────────────────────────── */
+.header-sep {
+  height: 1px;
+  background: linear-gradient(90deg,
+    rgba(120,60,255,0.9) 0%,
+    rgba(0,200,255,0.7) 35%,
+    rgba(0,255,140,0.4) 65%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: aurora 5s ease infinite;
+  border-radius: 99px;
+  margin-top: 20px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #2563eb, #0891b2);
+  background-size: 200% 200%;
+  animation: aurora 4s ease infinite;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s, box-shadow 0.22s;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  animation: shimmer-slide 3s ease infinite;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(124,58,237,0.55); }
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-topup {
+  background: linear-gradient(135deg, #059669, #06b6d4);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.22s, box-shadow 0.22s;
+}
+.btn-topup:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,150,105,0.55); }
+.btn-topup:active { transform: scale(0.97); }
+
+.btn-bill {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.22s, box-shadow 0.22s;
+}
+.btn-bill:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,38,38,0.55); }
+.btn-bill:active { transform: scale(0.97); }
+
+/* ─────────────────────────────────────────────────────────
+   BALANCE CARD (special gradient card)
+───────────────────────────────────────────────────────── */
+.balance-card {
+  background: linear-gradient(135deg, #1a0060 0%, #0c1a60 45%, #00204a 100%);
+  border: 1px solid rgba(120, 60, 255, 0.38);
+  border-radius: 24px;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.65),
+    0 0 50px rgba(120,60,255,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.balance-card:hover {
+  border-color: rgba(120, 60, 255, 0.6);
+  box-shadow:
+    0 24px 70px rgba(0,0,0,0.7),
+    0 0 70px rgba(120,60,255,0.20),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+/* Shimmer line in balance card top */
+.balance-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+}
+
+/* ─────────────────────────────────────────────────────────
+   RECHARTS OVERRIDES
+───────────────────────────────────────────────────────── */
+.recharts-cartesian-grid-horizontal line {
+  stroke: rgba(255,255,255,0.05) !important;
+}
+.recharts-tooltip-wrapper { outline: none !important; }
