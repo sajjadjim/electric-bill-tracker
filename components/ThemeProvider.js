@@ -9,7 +9,6 @@ export function useTheme() {
 
 export default function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("dark"); // default until hydration
-
   // On mount: check localStorage → then system preference
   useEffect(() => {
     const stored = localStorage.getItem("voltdash-theme");

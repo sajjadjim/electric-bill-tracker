@@ -18,7 +18,6 @@ export default function InputActions({ onSync }) {
   const [vatPercent, setVatPercent]     = useState(5);
   const [showSettings, setShowSettings] = useState(false);
 
-  // Dynamic calculations
   const quickEstimatedUnits = amount ? calculateUnitsFromBill(Number(amount)) : 0;
   const quickSlab = quickEstimatedUnits ? getSlabInfo(quickEstimatedUnits) : null;
 
